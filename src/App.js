@@ -1,26 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const {useState, useEffect} = React
+
+const App = () => {
+    const [count, setCount] = useState(0)
+    const [name, setName] = useState('Flavio')
+
+    useEffect(() => {
+        console.log(`Hi ${name}, you clicked ${count} times!`)
+        return () => {
+            console.log(`Unmounting...`)
+        }
+    }, [name, count])
+
+    return (
+        <div className="App">
+            <p>Hi {name}, you clicked {count} times!</p>
+            <button onClick={() => setCount(count + 1)}>Click count!</button>
+            <button onClick={() => setName(name === 'Flavio' ? 'Roger' : 'Flavio')}>Change name</button>
+        </div>
+    )
 }
 
-export default App;
+export default App
